@@ -1,0 +1,44 @@
+1. 04.TodoList실습.pdf를 보고 완성하세요.
+
+2. my fruits Shop 완성하기(script.js)
+   : 완성하기 전에 전체적인 소스를 분석해보세요.
+   : 제공한 fruits_shop_화면(index).png 이미지를 참고하세요. 
+   : script.js를 완성할때 샘플화면 참고는 (https://8253jang.github.io/)를 이용해주세요.
+
+3. WS_03 완성된 소스 준비
+
+4. moive 완성된 소스 준비
+
+5. https://www.w3schools.com/ 의 W3.CSS Templates 을 보고 맘에 드는 디자인을 선택하여
+   githubPage의 첫 화면이 될 index.html을 만드세요.
+   githubPage  첫 화면에 자신의 소개에 대한 내용이 들어 갈수 있도록 만들어주세요.
+   참고로 제가 보여드린 샘플 디자인은 W3.CSS의 "CV Template" 디자인입니다.
+
+6. githubPage의  index.html 화면에 아래의 링크 3개를 연결해주세요.
+   <a href="">TodoList </a>
+   <a href="">my fruits Shop </a>
+   <a href="">KOSTA Bank </a>
+  <a href="">Movie  </a>
+   
+7. github.com에 githubpage를 위한 repository를 생성해주세요
+    : 05.GitHubPage만들기.pdf파일을 참고하세요.
+
+8. 본인 pc에서 작성된 모든는 소스를 커밋하고
+   원격저장소에 push해주세요.
+   git을 관리될 폴더를 생성하고 > git init > profile에 해당하는 index.html 문서 넣고
+     1) todList폴더
+     2) myShop폴더
+     3) WS_03폴더
+     4) movie 폴더
+    
+      git commit 하고 > push한다.
+    
+
+9. https://본인계정.github.io/으로 접속해서 githubpage가 열리고
+    위 3개의  a링크가 잘 열리는지 확인해주세요.
+
+10. 모든 미션이 완성되면 slack에서 본인 github주소를 보내주세요.
+    아래 노션을 통해 완성된 자료를 체크해주세요. ( 노션 > JavaScript > FrontEnd Personal Project 실습  클릭)
+   *https://app.notion.com/p/FrontEnd-Personal-Project-334a7a6c42ce80aca6a5ff291dee44f7
+
+  수고하셨습니다.^.~
