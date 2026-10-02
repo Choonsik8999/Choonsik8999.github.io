@@ -229,22 +229,61 @@
       }
 
       /* 사진 뒤에 차선 노란색 블록을 살짝 어긋나게 */
-      .photo::before {
-        content: "";
-        position: absolute;
-        inset: 18px -18px -18px 18px;
-        background: var(--lane);
-        border-radius: 16px;
+      /* 사진 다섯 장을 겹쳐 쌓기 */
+      .photo-stack {
+        position: relative;
+        aspect-ratio: 4 / 5;
+        margin: 24px;
+        cursor: pointer;
       }
 
-      .photo img {
-        position: relative;
-        display: block;
+      .stack-card {
+        position: absolute;
+        inset: 0;
         width: 100%;
-        aspect-ratio: 4 / 5;
+        height: 100%;
         object-fit: cover;
+        border: 6px solid var(--surface);
         border-radius: 16px;
-        background: var(--line);
+        background: var(--lane);
+        box-shadow: 0 10px 30px rgba(27, 36, 33, 0.15);
+        transition:
+          transform 0.6s ease,
+          opacity 0.6s ease,
+          filter 0.6s ease;
+      }
+
+      /* 위에서부터 0번 → 4번: 뒤로 갈수록 살짝 비틀고 어둡게 */
+      .stack-card[data-pos="0"] {
+        z-index: 5;
+        transform: none;
+      }
+      .stack-card[data-pos="1"] {
+        z-index: 4;
+        transform: translate(12px, -10px) rotate(4deg);
+        filter: brightness(0.93);
+      }
+      .stack-card[data-pos="2"] {
+        z-index: 3;
+        transform: translate(-12px, -16px) rotate(-4deg);
+        filter: brightness(0.86);
+      }
+      .stack-card[data-pos="3"] {
+        z-index: 2;
+        transform: translate(18px, -20px) rotate(7deg);
+        filter: brightness(0.8);
+      }
+      .stack-card[data-pos="4"] {
+        z-index: 1;
+        transform: translate(-16px, -24px) rotate(-7deg);
+        filter: brightness(0.75);
+      }
+
+      /* 맨 위 사진이 왼쪽으로 빠져나가는 동작 (위 규칙들보다 아래에 있어야 함) */
+      .stack-card.leaving {
+        z-index: 6;
+        transform: translateX(-120%) rotate(-12deg);
+        opacity: 0;
       }
 
       /* ================= 노선도 (지나온 길) ================= */
@@ -710,7 +749,11 @@
           </div>
 
           <figure class="photo">
-            <img src="춘식.jpeg" alt="송재훈 프로필 사진" />
+            <div
+              class="photo-stack"
+              id="photoStack"
+              title="클릭하면 다음 사진"
+            ></div>
           </figure>
         </div>
       </section>
@@ -911,6 +954,64 @@
 
       // ================= 푸터 연도 =================
       document.querySelector("#year").textContent = new Date().getFullYear();
+
+      // ================= 프로필 사진 넘기기 =================
+      // 파일 이름과 확장자(.jpeg / .jpg / .png)를 실제 파일과 똑같이 맞춰주세요.
+      const photos = [
+        "비숑.jpeg",
+        "비숑2.jpeg",
+        "비숑3.jpeg",
+        "비숑4.jpeg",
+        "비숑5.png",
+      ];
+      const stack = document.querySelector("#photoStack");
+
+      const cards = photos.map((src, i) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = `송재훈 프로필 사진 ${i + 1}`;
+        img.className = "stack-card";
+        img.dataset.pos = i; // 0이 맨 위
+        stack.appendChild(img);
+        return img;
+      });
+
+      let busy = false; // 넘어가는 중에 또 넘기지 않도록
+
+      function nextPhoto() {
+        if (busy) return;
+        busy = true;
+
+        const top = cards.find((c) => c.dataset.pos === "0");
+        top.classList.add("leaving");
+
+        // 나머지 사진은 한 칸씩 앞으로 (dataset 값은 문자열이라 Number로 변환)
+        cards.forEach((c) => {
+          if (c !== top) c.dataset.pos = Number(c.dataset.pos) - 1;
+        });
+
+        // 빠져나간 사진을 맨 뒤로 보내기
+        setTimeout(() => {
+          top.classList.remove("leaving");
+          top.dataset.pos = cards.length - 1;
+          busy = false;
+        }, 600);
+      }
+
+      // 3.5초마다 자동으로 넘기기 (움직임 줄이기 설정을 켠 사람에게는 자동 재생 안 함)
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      let photoTimer = reduceMotion ? null : setInterval(nextPhoto, 3500);
+
+      // 클릭하면 바로 다음 사진, 자동 넘김 타이머는 다시 시작
+      stack.addEventListener("click", () => {
+        nextPhoto();
+        if (photoTimer) {
+          clearInterval(photoTimer);
+          photoTimer = setInterval(nextPhoto, 3500);
+        }
+      });
     </script>
   </body>
 </html>
