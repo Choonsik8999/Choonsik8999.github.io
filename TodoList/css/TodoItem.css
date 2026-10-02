@@ -1,0 +1,64 @@
+/* class TodoItem 요소
+1)display 속성 flex,
+2)align-items를 center (열을 기준으로 가운데 정렬)
+3)gap은 20px
+4)아래쪽 padding은 20px
+5)아래쪽 외곽선운 1px solid rgb(240, 240, 240);
+*/
+
+.TodoItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+/*
+class TodoItem 하위 자식 input 요소
+ 1) 가로크기 20px;
+*/
+
+.TodoItem input {
+  width: 20px;
+}
+
+/*
+class TodoItem 하위 자식 class content 요소
+ 1) flex : 1 설정( 1은 부모요소에 벗어나지 않는 범위내에서 최대 크기로 나온다. )
+;
+*/
+
+.TodoItem .content {
+  flex: 1;
+}
+
+/*
+class TodoItem 하위 자식 class date 요소
+1)글자 크기 14px
+2)글자색상 gray
+*/
+
+.TodoItem .date {
+  font-size: 14px;
+  color: gray;
+}
+
+/*
+class TodoItem 하위 자식 class button 요소
+1)cursor : pointer 설정
+2)글자색상 gray
+3)글자크기 14px
+4)외곽선 none
+5)테두리 둥글게 5px
+6) padding은 5px
+*/
+
+.TodoItem .button {
+  cursor: pointer;
+  color: gray;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}

@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="css/basic.css" />
+    <style type="text/css">
+      .poster {
+        width: 150px;
+        height: 150px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+    </style>
+
+    <script type="text/javascript"></script>
+  </head>
+  <body>
+    <button name="delItem">삭제</button>
+    <hr />
+    <article class="main">
+      <section>
+        <table width="80%" align="center">
+          <caption class="caption">
+            찜 리스트
+          </caption>
+          <thead>
+            <tr>
+              <th>이미지</th>
+              <th>상품번호</th>
+              <th>상품이름</th>
+              <th>가격</th>
+              <th>삭제</th>
+            </tr>
+          </thead>
+          <tbody id="content">
+            <!-- 찜목록 출력 -->
+          </tbody>
+        </table>
+      </section>
+      <section class="toalprice" id="price">
+        <!-- 가격 -->
+      </section>
+      <section class="link">
+        <table align="center">
+          <tr>
+            <td align="center">
+              <a href="">주문하러 가기</a>
+              <a href="index.html">DVD LIST</a>
+            </td>
+          </tr>
+        </table>
+      </section>
+    </article>
+  </body>
+  <script>
+    let str = "";
+    let totalPrice = 0;
+
+    for (let i = 0; i < localStorage.length; i++) {
+      let key = localStorage.key(i);
+      let value = localStorage.getItem(key);
+
+      let arr = value.split(",");
+
+      str += `<tr>`;
+      str += `<td><img src="${arr[1]}" class='poster'></td>`;
+      str += `<td>${key}</td>`;
+    }
+
+    /**let totalPrice = 0;
+
+    for (let i = 0; i < localStorage.length; i++) {
+      let key = localStorage.key(i);
+      let value = localStorage.getItem(key);
+
+
+
+
+      let data = value.split(",");
+
+      let name = data[0];
+      let image = data[1];
+      let price = data[2];
+
+      totalPrice += Number(price);
+
+      let tbody = document.querySelector("#content");
+
+      let row = tbody.insertRow();
+
+      row.insertCell(0).innerHTML = "<img class='poster' src='" + image + "'>";
+
+      row.insertCell(1).innerHTML = key;
+
+      row.insertCell(2).innerHTML = name;
+
+      row.insertCell(3).innerHTML = price;
+
+      row.insertCell(4).innerHTML =
+        "<button name='delete' data-key='" + key + "'>삭제</button>";
+    }
+
+    document.querySelector("#price").innerHTML =
+      "총 주문 가격 :" + totalPrice + "원";
+
+    document.querySelector("#content").addEventListener("click", function (e) {
+      if (e.target.matches("[name=delete]")) {
+        let key = e.target.dataset.key;
+
+        localStorage.removeItem(key);
+
+        e.target.parentNode.parentNode.remove();
+      }
+    });
+
+	**/
+  </script>
+</html>

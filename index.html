@@ -1,338 +1,909 @@
 <!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>송재훈 | Portfolio</title>
 
-<html>
-  <title>W3.CSS CV Template</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css" />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Roboto"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
+    <!-- JS가 켜져 있을 때만 애니메이션 초기 상태를 숨기기 위한 표시 -->
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
 
-  <style>
-    html,
-    body,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: "Roboto", sans-serif;
-    }
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
 
-    .cv-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-
-    @media (min-width: 601px) {
-      .cv-grid {
-        grid-template-columns: 1fr 2fr;
+    <style>
+      /* ================= 디자인 토큰 ================= */
+      :root {
+        --bg: #eef1ef; /* 콘크리트 같은 옅은 회녹색 */
+        --surface: #ffffff;
+        --ink: #1b2421; /* 아스팔트 */
+        --muted: #66706b;
+        --line: #d5dbd8;
+        --lane: #e3a21a; /* 차선 노란색: 포인트 */
+        --green: #2f6f62; /* 링크, 활성 상태 */
+        --gap: 20px; /* 노선도 정거장 사이 간격 */
       }
-    }
-  </style>
 
-  <body class="w3-light-grey">
-    <!-- Page Container -->
+      * {
+        box-sizing: border-box;
+      }
 
-    <main class="w3-content w3-margin-top" style="max-width: 1400px">
-      <!-- Grid -->
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 72px;
+      }
 
-      <div class="cv-grid w3-padding">
-        <!-- Left Column -->
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          "Pretendard Variable",
+          Pretendard,
+          -apple-system,
+          "Apple SD Gothic Neo",
+          "Malgun Gothic",
+          sans-serif;
+        line-height: 1.65;
+        word-break: keep-all;
+      }
 
-        <div>
-          <div class="w3-white w3-text-grey w3-card-4">
-            <div class="w3-display-container">
-              <img
-                src="/w3images/avatar_hat.jpg"
-                style="width: 100%"
-                alt="송재훈"
-              />
+      /* 줄바꿈: 제목은 줄 길이를 고르게, 본문은 마지막 줄에 한 단어만 남지 않게 */
+      h1,
+      h2,
+      h3,
+      h4 {
+        text-wrap: balance;
+      }
+      p {
+        text-wrap: pretty;
+      }
 
-              <div class="w3-display-bottomleft w3-container w3-text-black">
-                <h2>송재훈</h2>
-              </div>
+      /* 의미 단위로 묶어서, 공간이 충분하면 한 줄로 유지 */
+      .line {
+        display: inline-block;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid var(--lane);
+        outline-offset: 3px;
+      }
+
+      .wrap {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      section {
+        padding: 88px 0;
+      }
+
+      .section-head h2 {
+        margin: 0 0 6px;
+        font-size: clamp(26px, 3.5vw, 34px);
+        letter-spacing: -0.02em;
+      }
+
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      /* ================= 상단 내비게이션 ================= */
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(238, 241, 239, 0.85);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .topbar .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+
+      .brand {
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .topbar nav {
+        display: flex;
+        gap: 22px;
+      }
+
+      .topbar nav a {
+        text-decoration: none;
+        color: var(--muted);
+        font-size: 15px;
+        transition: color 0.2s;
+      }
+
+      .topbar nav a:hover,
+      .topbar nav a.active {
+        color: var(--ink);
+      }
+
+      .topbar nav a.active {
+        box-shadow: 0 2px 0 var(--lane);
+      }
+
+      /* ================= 히어로 ================= */
+      .hero {
+        padding: 80px 0 72px;
+      }
+
+      .hero .wrap {
+        display: grid;
+        grid-template-columns: 1.7fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+
+      .hello {
+        margin: 0 0 12px;
+        color: var(--green);
+        font-weight: 600;
+      }
+
+      .hero h1 {
+        margin: 0 0 20px;
+        font-size: clamp(32px, 4.4vw, 50px);
+        line-height: 1.25;
+        letter-spacing: -0.03em;
+        font-weight: 800;
+      }
+
+      .hero-sub {
+        margin: 0 0 28px;
+        max-width: 36em;
+        font-size: 18px;
+        color: var(--muted);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        border: 2px solid var(--ink);
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+
+      .btn-primary {
+        background: var(--ink);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--green);
+        border-color: var(--green);
+      }
+      .btn-ghost:hover {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 32px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .skills li {
+        padding: 4px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--surface);
+        font-size: 14px;
+      }
+
+      .photo {
+        position: relative;
+        margin: 0;
+      }
+
+      /* 사진 뒤에 차선 노란색 블록을 살짝 어긋나게 */
+      .photo::before {
+        content: "";
+        position: absolute;
+        inset: 18px -18px -18px 18px;
+        background: var(--lane);
+        border-radius: 16px;
+      }
+
+      .photo img {
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        border-radius: 16px;
+        background: var(--line);
+      }
+
+      /* ================= 노선도 (지나온 길) ================= */
+      .route-section {
+        background: var(--surface);
+      }
+
+      .route {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: var(--gap);
+        margin: 48px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .stop {
+        position: relative;
+        padding-top: 36px;
+      }
+
+      /* 정거장 점 */
+      .stop .dot {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--surface);
+        border: 4px solid var(--ink);
+      }
+
+      /* 다음 정거장까지 이어지는 선 */
+      .stop::after {
+        content: "";
+        position: absolute;
+        top: 7px;
+        left: 18px;
+        width: calc(100% + var(--gap) - 18px);
+        height: 4px;
+        background: var(--ink);
+        transform-origin: left;
+      }
+
+      .stop:last-child::after {
+        display: none;
+      }
+
+      /* 현재 위치 */
+      .stop.current .dot {
+        background: var(--lane);
+        border-color: var(--ink);
+      }
+
+      .stop.current .dot::after {
+        content: "";
+        position: absolute;
+        inset: -8px;
+        border-radius: 50%;
+        border: 2px solid var(--lane);
+        animation: pulse 2s ease-out infinite;
+      }
+
+      /* 현재 → 목표 구간은 아직 가지 않은 길이라 점선 */
+      .stop.current::after {
+        background: repeating-linear-gradient(
+          90deg,
+          var(--muted) 0 8px,
+          transparent 8px 14px
+        );
+      }
+
+      .stop.future .dot {
+        border-style: dashed;
+        border-color: var(--muted);
+      }
+
+      .stop-when {
+        margin: 0;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .stop h3 {
+        margin: 2px 0 0;
+        font-size: 19px;
+        letter-spacing: -0.01em;
+      }
+
+      .stop.current h3 {
+        color: var(--green);
+      }
+
+      @keyframes pulse {
+        from {
+          transform: scale(0.8);
+          opacity: 1;
+        }
+        to {
+          transform: scale(1.6);
+          opacity: 0;
+        }
+      }
+
+      /* 등장 애니메이션: 화면에 들어오면 왼쪽부터 차례로 */
+      .js .stop {
+        opacity: 0;
+        transform: translateY(10px);
+        transition:
+          opacity 0.5s,
+          transform 0.5s;
+        transition-delay: calc(var(--i) * 0.35s);
+      }
+
+      .js .stop::after {
+        transform: scaleX(0);
+        transition: transform 0.45s ease-out;
+        transition-delay: calc(var(--i) * 0.35s + 0.25s);
+      }
+
+      .js .route.is-visible .stop {
+        opacity: 1;
+        transform: none;
+      }
+      .js .route.is-visible .stop::after {
+        transform: scaleX(1);
+      }
+
+      /* ================= 창업 도전 ================= */
+      .ventures {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 40px;
+        margin: 40px 0 0;
+        align-items: start;
+      }
+
+      .venture-group h3 {
+        margin: 0 0 14px;
+        font-size: 15px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .venture {
+        border-radius: 12px;
+      }
+
+      .venture h4 {
+        margin: 12px 0 6px;
+        letter-spacing: -0.01em;
+      }
+
+      .venture p {
+        margin: 0;
+      }
+
+      /* 진행 중: 어둡고 크게 */
+      .venture.now {
+        padding: 32px;
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .venture.now h4 {
+        font-size: 28px;
+      }
+      .venture.now p {
+        color: #b9c2be;
+      }
+
+      /* 지난 도전: 차분하게 */
+      .venture.past {
+        padding: 24px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+      }
+
+      .venture.past h4 {
+        font-size: 20px;
+      }
+      .venture.past p {
+        color: var(--muted);
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 3px 10px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .status.pending {
+        background: var(--lane);
+        color: var(--ink);
+      }
+      .status.done {
+        background: #e1e7e4;
+        color: var(--green);
+      }
+
+      /* 결과 대기 중 표시: 노선도의 현재 위치와 같은 깜빡임 */
+      .status.pending::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--ink);
+        animation: blink 1.6s ease-in-out infinite;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0.25;
+        }
+      }
+
+      /* ================= 프로젝트 ================= */
+      #projects {
+        background: var(--surface);
+      }
+
+      .project-list {
+        margin: 40px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .project {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 6px 24px;
+        padding: 26px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .project:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .project h3 {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: -0.01em;
+      }
+
+      .project h3 a {
+        text-decoration: none;
+      }
+
+      .project h3 a:hover {
+        color: var(--green);
+        text-decoration: underline;
+        text-decoration-color: var(--lane);
+        text-decoration-thickness: 3px;
+        text-underline-offset: 5px;
+      }
+
+      .project-date {
+        margin: 0;
+        font-size: 14px;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+
+      .project-desc {
+        grid-column: 1 / -1;
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .project-tags {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 6px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .project-tags li {
+        padding: 2px 10px;
+        border-radius: 4px;
+        background: #e1e7e4;
+        font-size: 13px;
+      }
+
+      /* ================= 연락 / 푸터 ================= */
+      .contact {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .contact h2 {
+        margin: 0 0 8px;
+        font-size: clamp(26px, 3.5vw, 34px);
+      }
+
+      .contact p {
+        margin: 0 0 28px;
+        color: #b9c2be;
+      }
+
+      .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .contact .btn {
+        border-color: #fff;
+        color: #fff;
+      }
+      .contact .btn:hover {
+        background: var(--lane);
+        border-color: var(--lane);
+        color: var(--ink);
+      }
+
+      footer {
+        padding: 24px 0;
+        background: var(--ink);
+        border-top: 1px solid #34403b;
+        color: #8a948f;
+        font-size: 14px;
+      }
+
+      /* ================= 반응형 ================= */
+      @media (max-width: 760px) {
+        section {
+          padding: 64px 0;
+        }
+        .hero {
+          padding: 48px 0;
+        }
+        .hero .wrap {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .photo {
+          max-width: 320px;
+        }
+        .topbar nav {
+          gap: 14px;
+        }
+        .topbar nav a {
+          font-size: 14px;
+        }
+
+        /* 노선도를 세로로 */
+        .route {
+          grid-template-columns: 1fr;
+          --gap: 28px;
+        }
+        .stop {
+          padding: 0 0 0 40px;
+        }
+        .stop::after {
+          top: 18px;
+          left: 7px;
+          width: 4px;
+          height: calc(100% + var(--gap) - 18px);
+          transform-origin: top;
+        }
+        .stop.current::after {
+          background: repeating-linear-gradient(
+            180deg,
+            var(--muted) 0 8px,
+            transparent 8px 14px
+          );
+        }
+        .js .stop::after {
+          transform: scaleY(0);
+        }
+        .js .route.is-visible .stop::after {
+          transform: scaleY(1);
+        }
+
+        .project {
+          grid-template-columns: 1fr;
+        }
+        .ventures {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        .venture.now {
+          padding: 24px;
+        }
+        .venture.now h4 {
+          font-size: 24px;
+        }
+      }
+
+      /* 움직임 줄이기 설정을 켠 사용자에게는 애니메이션 없이 */
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+        .js .stop {
+          opacity: 1;
+          transform: none;
+        }
+        .js .stop::after {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ========== 상단 메뉴 ========== -->
+    <header class="topbar">
+      <div class="wrap">
+        <a class="brand" href="#top">Portfolio</a>
+        <nav aria-label="페이지 메뉴">
+          <a href="#route">지나온 길</a>
+          <a href="#startup">창업 도전</a>
+          <a href="#projects">개발 프로젝트</a>
+          <a href="#contact">연락하기</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- ========== 히어로 ========== -->
+      <section class="hero">
+        <div class="wrap">
+          <div>
+            <p class="hello">안녕하세요, 송재훈입니다.</p>
+            <h1>
+              <span class="line">모빌리티 현장에서 일했고,</span>
+              <span class="line">서비스를 만드는 법을 배웁니다.</span>
+            </h1>
+            <p class="hero-sub">
+              <span class="line">공유모빌리티 회사와 기아에서 일했습니다.</span
+              ><br />
+              <span class="line">모빌리티 서비스를 직접 만들기 위해</span>
+              <span class="line">KOSTA에서 개발을 배우고 있습니다.</span>
+            </p>
+            <div class="actions">
+              <a class="btn btn-primary" href="#projects">프로젝트 보기</a>
+              <a class="btn btn-ghost" href="#contact">연락하기</a>
+            </div>
+            <ul class="skills" aria-label="다루는 기술">
+              <li>HTML / CSS</li>
+              <li>JavaScript</li>
+              <li>Java</li>
+            </ul>
+          </div>
+
+          <figure class="photo">
+            <img src="춘식.jpeg" alt="송재훈 프로필 사진" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- ========== 지나온 길 (노선도) ========== -->
+      <section class="route-section" id="route">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>지나온 길</h2>
+            <p>전공에서 시작해 창업이라는 새로운 도전을 향해 가고 있습니다.</p>
+          </div>
+
+          <!-- style="--i: n" 은 등장 순서 (애니메이션 지연 시간 계산용) -->
+          <ol class="route">
+            <li class="stop" style="--i: 0">
+              <span class="dot"></span>
+              <p class="stop-when">학부</p>
+              <h3>신소재공학</h3>
+            </li>
+            <li class="stop" style="--i: 1">
+              <span class="dot"></span>
+              <p class="stop-when">경력</p>
+              <h3>공유모빌리티 회사</h3>
+            </li>
+            <li class="stop" style="--i: 2">
+              <span class="dot"></span>
+              <p class="stop-when">경력</p>
+              <h3>기아</h3>
+            </li>
+            <li class="stop current" style="--i: 3">
+              <span class="dot"></span>
+              <p class="stop-when">현재</p>
+              <h3>KOSTA 교육 과정</h3>
+            </li>
+            <li class="stop future" style="--i: 4">
+              <span class="dot"></span>
+              <p class="stop-when">목표</p>
+              <h3>모빌리티 창업</h3>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ========== 창업 도전 ========== -->
+      <section id="startup">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>창업 도전</h2>
+            <p>개발 공부와 함께, 모빌리티 창업을 꾸준히 두드리고 있습니다.</p>
+          </div>
+
+          <div class="ventures">
+            <div class="venture-group">
+              <h3>지금 도전 중</h3>
+              <article class="venture now">
+                <span class="status pending">결과 대기 중</span>
+                <h4>모두의창업 2기</h4>
+                <p>모빌리티 플랫폼 아이디어로 도전했습니다.</p>
+              </article>
             </div>
 
-            <div class="w3-container">
-              <p>
-                <i
-                  class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"
-                ></i>
-                Frontend Developer
-              </p>
-
-              <p>
-                <i
-                  class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"
-                ></i>
-                Seoul, South Korea
-              </p>
-
-              <p>
-                <i
-                  class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"
-                ></i>
-                skmagicsk@naver.com
-              </p>
-
-              <p>
-                <i
-                  class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"
-                ></i>
-                010-5055-5055
-              </p>
-
-              <hr />
-
-              <p class="w3-large">
-                <b>
-                  <i
-                    class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"
-                  ></i>
-                  Skills
-                </b>
-              </p>
-
-              <p>Adobe Photoshop</p>
-
-              <div class="w3-light-grey w3-round-xlarge w3-small">
-                <div
-                  class="w3-container w3-center w3-round-xlarge w3-teal"
-                  style="width: 90%"
-                >
-                  90%
-                </div>
-              </div>
-
-              <p>Photography</p>
-
-              <div class="w3-light-grey w3-round-xlarge w3-small">
-                <div
-                  class="w3-container w3-center w3-round-xlarge w3-teal"
-                  style="width: 80%"
-                >
-                  80%
-                </div>
-              </div>
-
-              <p>Illustrator</p>
-
-              <div class="w3-light-grey w3-round-xlarge w3-small">
-                <div
-                  class="w3-container w3-center w3-round-xlarge w3-teal"
-                  style="width: 75%"
-                >
-                  75%
-                </div>
-              </div>
-
-              <p>Media</p>
-
-              <div class="w3-light-grey w3-round-xlarge w3-small">
-                <div
-                  class="w3-container w3-center w3-round-xlarge w3-teal"
-                  style="width: 50%"
-                >
-                  50%
-                </div>
-              </div>
-
-              <br />
-
-              <p class="w3-large">
-                <b>
-                  <i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>
-                  Languages
-                </b>
-              </p>
-
-              <p>Korean</p>
-
-              <div class="w3-light-grey w3-round-xlarge">
-                <div
-                  class="w3-round-xlarge w3-teal"
-                  style="height: 24px; width: 100%"
-                ></div>
-              </div>
-
-              <p>Spanish</p>
-
-              <div class="w3-light-grey w3-round-xlarge">
-                <div
-                  class="w3-round-xlarge w3-teal"
-                  style="height: 24px; width: 55%"
-                ></div>
-              </div>
-
-              <p>German</p>
-
-              <div class="w3-light-grey w3-round-xlarge">
-                <div
-                  class="w3-round-xlarge w3-teal"
-                  style="height: 24px; width: 25%"
-                ></div>
-              </div>
-
-              <br />
+            <div class="venture-group">
+              <h3>지난 도전</h3>
+              <article class="venture past">
+                <span class="status done">최종 단계 진출</span>
+                <h4>예비창업패키지</h4>
+                <p>모빌리티 업사이클링 아이디어로 도전했습니다.</p>
+              </article>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- Right Column -->
+      <!-- ========== 프로젝트 (JS로 렌더링) ========== -->
+      <section id="projects">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>개발 프로젝트</h2>
+            <p>KOSTA 개발자 양성 과정에서 직접 만든 프로젝트입니다.</p>
+          </div>
 
-        <div>
-          <!-- Work Experience -->
-
-          <section class="w3-container w3-card w3-white w3-margin-bottom">
-            <h2 class="w3-text-grey w3-padding-16">
-              <i
-                class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"
-              ></i>
-              Work Experience
-            </h2>
-
-            <div class="w3-container">
-              <h5 class="w3-opacity">
-                <b>Front End Developer / w3schools.com</b>
-              </h5>
-
-              <h6 class="w3-text-teal">
-                <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-                Jan 2015 -
-                <span class="w3-tag w3-teal w3-round">Current</span>
-              </h6>
-
-              <p>
-                Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel
-                in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora
-                soluta ea et odio, unde doloremque repellendus iure, iste.
-              </p>
-
-              <hr />
-            </div>
-
-            <div class="w3-container">
-              <h5 class="w3-opacity">
-                <b>Web Developer / something.com</b>
-              </h5>
-
-              <h6 class="w3-text-teal">
-                <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-                Mar 2012 - Dec 2014
-              </h6>
-
-              <p>
-                Consectetur adipisicing elit. Praesentium magnam consectetur vel
-                in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora
-                soluta ea et odio, unde doloremque repellendus iure, iste.
-              </p>
-
-              <hr />
-            </div>
-
-            <div class="w3-container">
-              <h5 class="w3-opacity">
-                <b>Graphic Designer / designsomething.com</b>
-              </h5>
-
-              <h6 class="w3-text-teal">
-                <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-                Jun 2010 - Mar 2012
-              </h6>
-
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-              <br />
-            </div>
-          </section>
-
-          <!-- Education -->
-
-          <section class="w3-container w3-card w3-white">
-            <h2 class="w3-text-grey w3-padding-16">
-              <i
-                class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"
-              ></i>
-              Education
-            </h2>
-
-            <div class="w3-container">
-              <h5 class="w3-opacity">
-                <b>W3Schools.com</b>
-              </h5>
-
-              <h6 class="w3-text-teal">
-                <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-                Forever
-              </h6>
-
-              <p>Web Development! All I need to know in one place</p>
-
-              <hr />
-            </div>
-
-            <div class="w3-container">
-              <h5 class="w3-opacity">
-                <b>London Business School</b>
-              </h5>
-
-              <h6 class="w3-text-teal">
-                <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-                2013 - 2015
-              </h6>
-
-              <p>Master Degree</p>
-
-              <hr />
-            </div>
-
-            <div class="w3-container">
-              <h5 class="w3-opacity">
-                <b>School of Coding</b>
-              </h5>
-
-              <h6 class="w3-text-teal">
-                <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-                2010 - 2013
-              </h6>
-
-              <p>Bachelor Degree</p>
-
-              <br />
-            </div>
-          </section>
+          <ul class="project-list" id="projectList"></ul>
         </div>
+      </section>
 
-        <!-- End Grid -->
-      </div>
+      <!-- ========== 연락하기 ========== -->
+      <section class="contact" id="contact">
+        <div class="wrap">
+          <h2>연락하기</h2>
+          <p>모빌리티나 창업 이야기라면 언제든 환영입니다.</p>
+          <div class="contact-links">
+            <!-- 본인 주소로 바꾸세요 -->
+            <a class="btn" href="mailto:your@email.com">이메일 보내기</a>
+            <a
+              class="btn"
+              href="https://github.com/"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+      </section>
     </main>
 
-    <!-- Footer -->
-
-    <footer class="w3-container w3-teal w3-center w3-margin-top">
-      <p>Find me on social media.</p>
-
-      <i class="fa fa-facebook-official w3-hover-opacity"></i>
-      <i class="fa fa-instagram w3-hover-opacity"></i>
-      <i class="fa fa-snapchat w3-hover-opacity"></i>
-      <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-      <i class="fa fa-twitter w3-hover-opacity"></i>
-      <i class="fa fa-linkedin w3-hover-opacity"></i>
-
-      <p>
-        Powered by
-        <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">
-          w3.css
-        </a>
-      </p>
+    <footer>
+      <div class="wrap">© <span id="year"></span> 송재훈</div>
     </footer>
+
+    <script>
+      // ================= 프로젝트 데이터 =================
+      // 새 프로젝트가 생기면 이 배열에 객체 하나만 추가하면 화면에 자동으로 나옵니다.
+      const projects = [
+        {
+          title: "TodoList",
+          link: "TodoList/TodoListIndex.html",
+          date: "2026.10.01 ~ 10.02",
+          desc: "할 일 추가, 완료 체크, 삭제, 검색을 바닐라 JavaScript로 구현했습니다.",
+          tags: ["DOM", "이벤트", "배열 메서드"],
+        },
+        {
+          title: "my fruits Shop",
+          link: "FruitsShop/FruitsShopIndex.html",
+          date: "2026.10.01 ~ 10.02",
+          desc: "상품 검색과 이름순·가격순 정렬, 더보기, 쿼리스트링을 활용한 상세 페이지를 만들었습니다.",
+          tags: ["DOM", "배열 메서드", "URL 파라미터"],
+        },
+        {
+          title: "KOSTA Bank",
+          link: "WS_03/WS_03_template/KOSTABankIndex.html",
+          date: "2026.09.20 ~ 09.22",
+          desc: "배너 문구 자동 변경, 로그인과 회원가입 입력값 검증 후 폼 전송을 구현했습니다.",
+          tags: ["폼 검증", "이벤트"],
+        },
+        {
+          title: "Movie",
+          link: "webStorage_Movie실습/MovieSample/MovieIndex.html",
+          date: "2026.09.24 ~ 09.27",
+          desc: "Web Storage에 데이터를 저장하고 불러오는 영화 페이지를 실습했습니다.",
+          tags: ["Web Storage"],
+        },
+      ];
+
+      const listEl = document.querySelector("#projectList");
+
+      projects.forEach((p) => {
+        const li = document.createElement("li");
+        li.className = "project";
+        li.innerHTML = `
+          <h3><a href="${p.link}">${p.title}</a></h3>
+          <p class="project-date">${p.date}</p>
+          <p class="project-desc">${p.desc}</p>
+          <ul class="project-tags">
+            ${p.tags.map((t) => `<li>${t}</li>`).join("")}
+          </ul>`;
+        listEl.appendChild(li);
+      });
+
+      // ================= 노선도: 화면에 들어오면 애니메이션 시작 =================
+      const route = document.querySelector(".route");
+      const routeObserver = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            route.classList.add("is-visible");
+            routeObserver.disconnect(); // 한 번만 실행
+          }
+        },
+        { threshold: 0.3 },
+      );
+      routeObserver.observe(route);
+
+      // ================= 메뉴: 지금 보고 있는 섹션 표시 =================
+      const navLinks = document.querySelectorAll(".topbar nav a");
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            navLinks.forEach((a) =>
+              a.classList.toggle(
+                "active",
+                a.getAttribute("href") === `#${entry.target.id}`,
+              ),
+            );
+          });
+        },
+        { rootMargin: "-45% 0px -50% 0px" },
+      );
+      ["route", "startup", "projects", "contact"].forEach((id) =>
+        sectionObserver.observe(document.getElementById(id)),
+      );
+
+      // ================= 푸터 연도 =================
+      document.querySelector("#year").textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>
